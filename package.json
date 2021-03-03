@@ -4,5 +4,21 @@
   "description": "Cloning Youtube with VanillaJS and NodeJS",
   "main": "index.js",
   "author": "chocodigo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chocodigo/wetube.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chocodigo/wetube/issues"
+  },
+  "homepage": "https://github.com/chocodigo/wetube#readme"
 }
