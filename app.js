@@ -11,7 +11,9 @@ import { localsMiddleWare } from "./middlewares";
 
 const app = express(); // express 어플리케이션을 실행함
 
-app.use(helmet());
+const cors = require("cors");
+
+app.use(helmet({ contentSecurityPolicy: false }));
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +21,23 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 app.use(localsMiddleWare);
+
+app.all("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
+
+app.options("*", cors());
+app.use(function (req, res, next) {
+  res.setHeader(
+    "Content-Security-Policy",
+    "script-src 'self' https://www.youtube.com"
+  );
+  return next();
+});
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
